@@ -9,13 +9,11 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
   def get_columns(self):
     return nautilus.Column("NautilusPython::date_deleted_column",
 			   "date_deleted",
-			   "Date deleted",
+			   "Date Deleted",
 			   "Get the date deleted"),
 
   def update_file_info(self, file):
-    loc = file.get_location()
-
-    info = loc.query_info("trash")
+    info = gio.File(file.get_uri()).query_info("trash")
 
     if info.list_attributes("trash") == []:
       return
