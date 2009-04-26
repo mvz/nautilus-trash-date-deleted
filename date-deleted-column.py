@@ -15,7 +15,9 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
   def update_file_info(self, file):
     info = gio.File(file.get_uri()).query_info("trash")
 
-    if info.list_attributes("trash") == []:
-      return
+    date = info.get_attribute_as_string("trash::deletion-date")
 
-    file.add_string_attribute('date_deleted', info.get_attribute_as_string("trash::deletion-date"))
+    if date == None:
+      date = "1900-01-01T00:00:00"
+
+    file.add_string_attribute('date_deleted', date)
