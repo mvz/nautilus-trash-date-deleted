@@ -18,6 +18,6 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
     date = info.get_attribute_as_string("trash::deletion-date")
 
     if date == None:
-      date = "1900-01-01T00:00:00"
+      date = ""
 
     file.add_string_attribute('date_deleted', date)
