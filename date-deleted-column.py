@@ -13,7 +13,14 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
 			   "Get the date deleted"),
 
   def update_file_info(self, file):
-    info = gio.File(file.get_uri()).query_info("trash")
+    uri = file.get_uri()
+
+    giofile = gio.File(uri)
+
+    if giofile.get_uri_scheme() != "trash" or not giofile.query_exists():
+      return
+
+    info = giofile.query_info("trash")
 
     date = info.get_attribute_as_string("trash::deletion-date")
 
