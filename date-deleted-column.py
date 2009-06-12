@@ -7,10 +7,14 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
     pass
   
   def get_columns(self):
-    return nautilus.Column("NautilusPython::date_deleted_column",
+    return (nautilus.Column("NautilusPython::date_deleted_column",
 			   "date_deleted",
 			   "Date Deleted",
 			   "Get the date deleted"),
+    nautilus.Column("NautilusPython::location_deleted_from_column",
+			   "location_deleted_from",
+			   "Location Deleted From",
+			   "Get the path from which item was deleted"),)
 
   def update_file_info(self, file):
     uri = file.get_uri()
@@ -27,4 +31,10 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
     if date == None:
       date = ""
 
+    ldf = info.get_attribute_as_string("trash::orig-path")
+
+    if ldf == None:
+      ldf = ""
+
     file.add_string_attribute('date_deleted', date)
+    file.add_string_attribute('location_deleted_from', ldf)
