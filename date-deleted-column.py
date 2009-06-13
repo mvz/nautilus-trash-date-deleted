@@ -1,4 +1,5 @@
 import gio
+import os
 
 import nautilus
 
@@ -11,10 +12,10 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
 			   "date_deleted",
 			   "Date Deleted",
 			   "Get the date deleted"),
-    nautilus.Column("NautilusPython::location_deleted_from_column",
-			   "location_deleted_from",
-			   "Location Deleted From",
-			   "Get the path from which item was deleted"),)
+    nautilus.Column("NautilusPython::original_path_column",
+			   "original_path",
+			   "Original Location",
+			   "Get the original location"),)
 
   def update_file_info(self, file):
     uri = file.get_uri()
@@ -31,10 +32,12 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
     if date == None:
       date = ""
 
-    ldf = info.get_attribute_as_string("trash::orig-path")
+    path = info.get_attribute_as_string("trash::orig-path")
 
-    if ldf == None:
-      ldf = ""
+    if path == None:
+      path = ""
+
+    path = os.path.dirname(path)
 
     file.add_string_attribute('date_deleted', date)
-    file.add_string_attribute('location_deleted_from', ldf)
+    file.add_string_attribute('original_path', path)
