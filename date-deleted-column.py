@@ -9,13 +9,13 @@ class ColumnExtension(nautilus.ColumnProvider, nautilus.InfoProvider):
   
   def get_columns(self):
     return (nautilus.Column("NautilusPython::date_deleted_column",
-			   "date_deleted",
-			   "Date Deleted",
-			   "Get the date deleted"),
-    nautilus.Column("NautilusPython::original_path_column",
-			   "original_path",
-			   "Original Location",
-			   "Get the original location"),)
+			    "date_deleted",
+			    "Date Deleted",
+			    "Get the date deleted"),
+	    nautilus.Column("NautilusPython::original_path_column",
+			    "original_path",
+			    "Original Location",
+			    "Get the original location"),)
 
   def update_file_info(self, file):
     uri = file.get_uri()

@@ -5,6 +5,9 @@ This is mostly a proof-of-concept for showing the deletion date for trash
 in Nautilus. Due to the limits of the nautilus plugin system, the date is
 shown and sorted as a simple string, rather than as a date.
 
+This plugin now also provides a column for the other trash information:
+original location.
+
 You will need the python bindings for creating Nautilus plugins, e.g.,
 
   sudo aptitude install python-nautilus
